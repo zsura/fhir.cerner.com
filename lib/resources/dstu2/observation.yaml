@@ -1,0 +1,129 @@
+---
+name: Observation
+field_name_base_url: http://hl7.org/fhir/DSTU2/observation-definitions.html#Observation
+fields:
+
+- name: category
+  required: 'No'
+  cardinality: 0..1
+  type: CodeableConcept
+  description: >
+                 A code that classifies the general type of observation being made. This is used for searching, sorting
+                 and display purposes.
+  example: |
+             {"category": {
+                "coding": [
+                 {"system": "http://hl7.org/fhir/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"}],
+                "text": "Laboratory"}}
+  binding:
+    description: Codes for high level observation categories.
+    terminology:
+    - display: Observation Category Codes
+      system: http://hl7.org/fhir/observation-category
+
+- name: code
+  required: 'Yes'
+  cardinality: 1..1
+  type: CodeableConcept
+  description: Describes what was observed. Sometimes this is called the observation "name".
+  example: |
+             {"code": {
+                "coding": [
+                 {"system": "http://loinc.org",
+                  "code": "3141-9",
+                  "display": "BODY WEIGHT:MASS:PT:^PATIENT:QN:MEASURED"}],
+                "text": "Weight Measured"}}
+  binding:
+    description: Codes identifying names of simple observations.
+    terminology:
+    - display: LOINC
+      system: http://loinc.org
+
+- name: component
+  required: 'No'
+  cardinality: 0..*
+  type: BackboneElement
+  description: >
+                 Some observations have multiple component observations. These component observations are expressed as
+                 separate code value pairs that share the same attributes. Examples include systolic and diastolic
+                 component observations for blood pressure measurement and multiple component observations for genetics
+                 observations.
+  example: |
+             {"component": [
+              {"code": {
+                 "coding": [
+                  {"system": "http://loinc.org",
+                   "code": "8480-6",
+                   "display": "INTRAVASCULAR SYSTOLIC:PRES:PT:ARTERIAL SYSTEM:QN:"}],
+                 "text": "Systolic Blood Pressure"},
+               "valueQuantity": {
+                 "value": 128,
+                 "unit": "mmHg",
+                 "system": "http://unitsofmeasure.org",
+                 "code": "mm[Hg]"},
+               "referenceRange": [
+                {"low": {
+                   "value": 46,
+                   "unit": "mmHg",
+                   "system": "http://unitsofmeasure.org",
+                   "code": "mm[Hg]"},
+                 "high": {
+                   "value": 97,
+                   "unit": "mmHg",
+                   "system": "http://unitsofmeasure.org",
+                   "code": "mm[Hg]"}}]},
+              {"code": {
+                 "coding": [
+                  {"system": "http://loinc.org",
+                   "code": "8462-4",
+                   "display": "INTRAVASCULAR DIASTOLIC:PRES:PT:ARTERIAL SYSTEM:QN:"}],
+                 "text": "Diastolic Blood Pressure"},
+               "valueQuantity": {
+                 "value": 82},
+               "referenceRange": [
+                {"low": {
+                   "value": 44},
+                 "high": {
+                   "value": 123}}]}]
+  children:
+
+  - name: code
+    required: 'Yes'
+    cardinality: 1..1
+    type: CodeableConcept
+    description: Describes what was observed. Sometimes this is called the observation "code".
+    example: |
+               {"code": {
+                  "coding": [
+                   {"system": "http://loinc.org",
+                    "code": "8480-6",
+                    "display": "INTRAVASCULAR SYSTOLIC:PRES:PT:ARTERIAL SYSTEM:QN:"}],
+                  "text": "Systolic Blood Pressure"}}
+    binding:
+      description: Codes identifying names of simple observations.
+      terminology:
+      - display: LOINC
+        system: http://loinc.org
+
+- name: interpretation
+  required: 'No'
+  cardinality: 0..1
+  type: CodeableConcept
+  description: >
+                 The assessment made based on the result of the observation. Intended as a simple compact code often
+                 placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status
+                 of the result. Otherwise known as abnormal flag.
+  example: |
+             {"interpretation": {
+                "coding": [
+                 {"system": "http://hl7.org/fhir/v2/0078",
+                  "code": "H",
+                  "display": "High"}],
+                "text": "HI"}}
+  binding:
+    description: Codes identifying interpretations of observations.
+    terminology:
+    - display: Version 2 Table 0078
+      system: http://hl7.org/fhir/DSTU2/v2/0078
