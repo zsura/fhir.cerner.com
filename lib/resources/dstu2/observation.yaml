@@ -40,6 +40,29 @@ fields:
     terminology:
     - display: LOINC
       system: http://loinc.org
+    - display: SNOMED CT
+      system: http://snomed.info/sct
+
+- name: interpretation
+  required: 'No'
+  cardinality: 0..1
+  type: CodeableConcept
+  description: >
+                 The assessment made based on the result of the observation. Intended as a simple compact code often
+                 placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status
+                 of the result. Otherwise known as abnormal flag.
+  example: |
+             {"interpretation": {
+                "coding": [
+                 {"system": "http://hl7.org/fhir/v2/0078",
+                  "code": "H",
+                  "display": "High"}],
+                "text": "HI"}}
+  binding:
+    description: Codes identifying interpretations of observations.
+    terminology:
+    - display: v2 Interpretation Codes
+      system: http://hl7.org/fhir/DSTU2/v2/0078
 
 - name: component
   required: 'No'
@@ -106,24 +129,5 @@ fields:
       terminology:
       - display: LOINC
         system: http://loinc.org
-
-- name: interpretation
-  required: 'No'
-  cardinality: 0..1
-  type: CodeableConcept
-  description: >
-                 The assessment made based on the result of the observation. Intended as a simple compact code often
-                 placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status
-                 of the result. Otherwise known as abnormal flag.
-  example: |
-             {"interpretation": {
-                "coding": [
-                 {"system": "http://hl7.org/fhir/v2/0078",
-                  "code": "H",
-                  "display": "High"}],
-                "text": "HI"}}
-  binding:
-    description: Codes identifying interpretations of observations.
-    terminology:
-    - display: Version 2 Table 0078
-      system: http://hl7.org/fhir/DSTU2/v2/0078
+      - display: SNOMED CT
+        system: http://snomed.info/sct
