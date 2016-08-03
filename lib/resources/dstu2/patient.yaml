@@ -1,0 +1,219 @@
+---
+name: Patient
+field_name_base_url: http://hl7.org/fhir/DSTU2/patient-definitions.html#Patient
+fields:
+- name: identifier
+  required: 'No'
+  cardinality: 0..*
+  type: Identifier
+  description: The identifier for the patient.
+  children:
+
+  - name: use
+    required: 'No'
+    cardinality: 0..1
+    type: code
+    description: The purpose of the identifier.
+    binding:
+      description: Identifies the purpose for the identifier.
+      terminology:
+      - display: IdentifierUse
+        system: http://hl7.org/fhir/identifier-use
+
+  - name: type
+    required: 'No'
+    cardinality: 0..1
+    type: CodeableConcept
+    description: The type for the identifier that can be used to determine which identifier to use for a specific purpose.
+    binding:
+      description: The type used to determine which identifier to use for a specific purpose.
+      terminology:
+      - display: Identifier Type Codes
+        system: http://hl7.org/fhir/identifier-type
+      - display: v2 Identifier Type
+        system: http://hl7.org/fhir/v2/0203
+
+- name: name
+  required: 'No'
+  cardinality: 0..*
+  type: HumanName
+  description: A name associated with the patient.
+  children:
+
+  - name: use
+    required: 'No'
+    cardinality: 0..1
+    type: code
+    description: The purpose for this name.
+    binding:
+      description: The use of a human name.
+      terminology:
+      - display: NameUse
+        system: http://hl7.org/fhir/name-use
+
+- name: telecom
+  required: 'No'
+  cardinality: 0..*
+  type: ContactPoint
+  description: A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.
+  children:
+
+  - name: system
+    required: 'No'
+    cardinality: 0..1
+    type: code
+    description: Identifies the communication system to use for the contact.
+    binding:
+      description: Telecommunications form for contact point.
+      terminology:
+      - display: ContactPointSystem
+        system: http://hl7.org/fhir/contact-point-system
+
+  - name: use
+    required: 'No'
+    cardinality: 0..1
+    type: code
+    description: Identifies the purpose for the contact point.
+    binding:
+      description: Use of contact point.
+      terminology:
+      - display: ContactPointUse
+        system: http://hl7.org/fhir/contact-point-use
+
+- name: gender
+  required: 'No'
+  cardinality: 0..1
+  type: code
+  description: The gender that the patient is considered to have for administration and record keeping purposes.
+  binding:
+    description: The gender of a person used for administrative purposes.
+    terminology:
+    - display: AdministrativeGender
+      system: http://hl7.org/fhir/administrative-gender
+
+- name: address
+  required: 'No'
+  cardinality: 0..*
+  type: Address
+  description: Addresses for the individual.
+  children:
+
+  - name: use
+    required: 'No'
+    cardinality: 0..1
+    type: code
+    description: The purpose of this address.
+    binding:
+      description: The use of an address.
+      terminology:
+      - display: AddressUse
+        system: http://hl7.org/fhir/address-use
+
+- name: maritalStatus
+  required: 'No'
+  cardinality: 0..1
+  type: CodeableConcept
+  description: The patient's most recent marital (civil) status.
+  binding:
+    description: The domestic partnership status of a person.
+    terminology:
+    - display: Marital Status Codes
+      system: http://hl7.org/fhir/marital-status
+    - display: v3 Code System MaritalStatus
+      system: http://hl7.org/fhir/v3/MaritalStatus
+    - display: v3 Code System NullFlavor
+      system: http://hl7.org/fhir/v3/NullFlavor
+
+- name: contact
+  required: 'No'
+  cardinality: 0..*
+  type: BackboneElement
+  description: A contact party (e.g. guardian, partner, friend) for the patient.
+  children:
+
+  - name: relationship
+    required: 'No'
+    cardinality: 0..*
+    type: CodeableConcept
+    description: The nature of the relationship between the patient and the contact person.
+    binding:
+      description: The nature of the relationship between a patient and a contact person for that patient.
+      terminology:
+      - display: PatientContactRelationship
+        system: http://hl7.org/fhir/patient-contact-relationship
+
+  - name: name
+    required: 'No'
+    cardinality: 0..*
+    type: HumanName
+    description: A name associated with the contact person.
+    children:
+
+    - name: use
+      required: 'No'
+      cardinality: 0..1
+      type: code
+      description: The purpose for this name.
+      binding:
+        description: The use of a human name.
+        terminology:
+        - display: NameUse
+          system: http://hl7.org/fhir/name-use
+
+  - name: telecom
+    required: 'No'
+    cardinality: 0..*
+    type: ContactPoint
+    description: A contact detail for the person, e.g. a telephone number or an email address.
+    children:
+
+    - name: system
+      required: 'No'
+      cardinality: 0..1
+      type: code
+      description: Identifies the communication system to use for the contact.
+      binding:
+        description: Telecommunications form for contact point.
+        terminology:
+        - display: ContactPointSystem
+          system: http://hl7.org/fhir/contact-point-system
+
+    - name: use
+      required: 'No'
+      cardinality: 0..1
+      type: code
+      description: Identifies the purpose for the contact point.
+      binding:
+        description: Use of contact point.
+        terminology:
+        - display: ContactPointUse
+          system: http://hl7.org/fhir/contact-point-use
+
+  - name: address
+    required: 'No'
+    cardinality: 0..*
+    type: Address
+    description: Address for the contact person.
+    children:
+
+    - name: use
+      required: 'No'
+      cardinality: 0..1
+      type: code
+      description: The purpose of this address.
+      binding:
+        description: The use of an address.
+        terminology:
+        - display: AddressUse
+          system: http://hl7.org/fhir/address-use
+
+  - name: gender
+    required: 'No'
+    cardinality: 0..1
+    type: code
+    description: The gender that the contact person is considered to have for administration and record keeping purposes.
+    binding:
+      description: The gender of a person used for administrative purposes.
+      terminology:
+      - display: AdministrativeGender
+        system: http://hl7.org/fhir/administrative-gender
